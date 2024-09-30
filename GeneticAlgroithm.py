@@ -8,6 +8,27 @@ import random
 targetString = ""
 populationNum = 100
 population = []
+mutation_rate = 0.05
+
+#funtion takes two partnts anc creates a child
+def crossover(p1, p2):
+
+    length = len(p1)
+    ranNum = random.randint(1,length - 1)
+    child = p1[:ranNum] + p2[ranNum + 1:]
+
+    return child
+
+def mutation(child, targetString):
+    return child
+
+def fitness(ind, targetString):
+    score = 0
+    for i in range(len(ind)):
+        if ind[i] == targetString[i]:
+            score+=1
+
+    return score
 
 # Take imput from terminal about what file you string is in
 print("Enter File Name:", end=" ")
@@ -30,4 +51,6 @@ for i in range(populationNum):
         individual += ranChar
     population.append(individual)
 
-print(len(population))
+
+#For testing
+#print(len(population))
