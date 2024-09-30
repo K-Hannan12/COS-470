@@ -61,5 +61,5 @@ def GeneticAlgroithm():
     
     #While loop to run until we match the string
     while True:
-        
+       break 
     
