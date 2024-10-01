@@ -7,7 +7,6 @@ import random
 
 # Funtion takes two partnts anc creates a child
 def crossover(p1, p2):
-
     length = len(p1)
     ranNum = random.randint(1,length - 1)
     child = p1[:ranNum] + p2[ranNum + 1:]
@@ -25,10 +24,10 @@ def mutation(child, targetString, mutation_rate):
 
 # This function cheaks to see if fitness of the indavidual in the population.
 def fitness(ind, targetString):
-    score = 0
+    score = 0.0
     for i in range(len(ind)):
         if ind[i] == targetString[i]:
-            score+=1
+            score+=1.0
 
     return score
 
@@ -45,10 +44,10 @@ def createPopulation(lenOftarget,populationNum):
     return population
 
 # This function selects parents to make children 
-def selection(population, avgFitness):
+def selection(population, avgFitness, targetString):
     eligibleparents = []
     for i in population:
-        if fitness(i) >= avgFitness:
+        if fitness(i,targetString) >= avgFitness:
             eligibleparents.append(i)
     if len(eligibleparents) < 2:
         p1 = random.choice(population)
@@ -64,10 +63,10 @@ def selection(population, avgFitness):
              
 
 def GeneticAlgroithm():
-
+    iterations = 0
     targetString = ""
-    populationNum = 100
-    mutation_rate = 0.05
+    POPULATION_SIZE = 100
+    MUTATION_RATE = 0.05
 
     # Take imput from terminal about what file you string is in
     print("Enter File Name:", end=" ")
@@ -78,13 +77,47 @@ def GeneticAlgroithm():
 
     # this might need to get replaced but for know we good
     targetString = targetString.replace("\n", " ")
-    print(targetString)
+
     # Get len of the string to make the correct population the correct length
     lenOftarget = len(targetString)
 
-    population = createPopulation(lenOftarget, populationNum)
+    population = createPopulation(lenOftarget, POPULATION_SIZE)
     
+    population.sort(key = lambda ind: fitness(ind, targetString), reverse = True)
+
+    if population[0] == targetString:
+        print ("Mach found: " + population[0])
+        return 
+
     #While loop to run until we match the string
     while True:
-       break 
-    
+        newPopulation = []
+        totalFitness = 0.0
+
+        #calculate the avg fitness of the population
+        for ind in population:
+            totalFitness += fitness(ind,targetString)
+            if totalFitness !=0:
+                avgFitness = totalFitness / POPULATION_SIZE
+        
+        #Create new population 
+        i = 0
+        while i < POPULATION_SIZE:
+            p1,p2 = selection(population,avgFitness,targetString)
+            child = crossover(p1, p2) 
+            child = mutation(child,targetString,MUTATION_RATE)
+            newPopulation.append(child)
+            i+=1
+        
+        population = newPopulation
+
+        population.sort(key = lambda ind: fitness(ind, targetString), reverse = True)
+
+        if population[0] == targetString:
+            print("Match Found in Iteration " + str(iterations) + ": " + population[0])
+            break
+        else:
+            print("Best Match in Iteration " + str(iterations) + ": " + population[0])
+            iterations += 1
+
+GeneticAlgroithm()
