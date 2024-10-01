@@ -44,6 +44,25 @@ def createPopulation(lenOftarget,populationNum):
 
     return population
 
+# This function selects parents to make children 
+def selection(population, avgFitness):
+    eligibleparents = []
+    for i in population:
+        if fitness(i) >= avgFitness:
+            eligibleparents.append(i)
+    if len(eligibleparents) < 2:
+        p1 = random.choice(population)
+        p2 = random.choice(population)
+        while p1 == p2:
+            p2 = random.choice(population)
+    else:
+        p1 = random.choice(eligibleparents)
+        p2 = random.choice(eligibleparents)
+        while p1 == p2:
+            p2 = random.choice(eligibleparents)
+    return p1, p2
+             
+
 def GeneticAlgroithm():
 
     targetString = ""
