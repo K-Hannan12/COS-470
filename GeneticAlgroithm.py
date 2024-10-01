@@ -5,11 +5,6 @@
 
 import random
 
-targetString = ""
-populationNum = 100
-population = []
-mutation_rate = 0.05
-
 # Funtion takes two partnts anc creates a child
 def crossover(p1, p2):
 
@@ -21,7 +16,7 @@ def crossover(p1, p2):
 
 # Cheaks to see if a char can be mutated and if it can it will.  
 # It will also only mutate the char if it dose not mach the target string.
-def mutation(child, targetString):
+def mutation(child, targetString, mutation_rate):
     for i in range(len(child)):
         if child[i] != targetString[i]:
             if random.random() <= mutation_rate:
@@ -37,7 +32,24 @@ def fitness(ind, targetString):
 
     return score
 
+# create population
+def createPopulation(lenOftarget,populationNum):
+    population = []
+    for i in range(populationNum):
+        individual = ""
+        for y in range(lenOftarget):
+            ranChar = chr(random.randint(0,255))
+            individual += ranChar
+        population.append(individual)
+
+    return population
+
 def GeneticAlgroithm():
+
+    targetString = ""
+    populationNum = 100
+    mutation_rate = 0.05
+
     # Take imput from terminal about what file you string is in
     print("Enter File Name:", end=" ")
     fileName = input()
@@ -51,13 +63,7 @@ def GeneticAlgroithm():
     # Get len of the string to make the correct population the correct length
     lenOftarget = len(targetString)
 
-    # create population
-    for i in range(populationNum):
-        individual = ""
-        for y in range(lenOftarget):
-            ranChar = chr(random.randint(0,255))
-            individual += ranChar
-        population.append(individual)
+    population = createPopulation(lenOftarget, populationNum)
     
     #While loop to run until we match the string
     while True:
