@@ -112,10 +112,11 @@ def GeneticAlgroithm():
         population.sort(key = lambda ind: fitness(ind, targetString), reverse = True)
 
         if population[0] == targetString:
-            print("Match Found in Iteration " + str(iterations) + ":\n" + population[0] + "\n\n")
+            print("Match Found in Iteration #" + str(iterations) + ":\n" + population[0] + "\n\n")
             return
         else:
-            print("Best Match in Iteration " + str(iterations) + ": \n" + population[0] + "\n")
+            #print("Best Match in Iteration " + str(iterations) + ": \n" + population[0] + "\n")
+            print("Best Match in Iteration #" + str(iterations) + " has fitness of " + str((fitness(population[0],targetString)/ len(targetString) * 100))+ "%\n\n")
             iterations += 1
 
 GeneticAlgroithm()
