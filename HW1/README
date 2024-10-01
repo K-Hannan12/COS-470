@@ -1,0 +1,18 @@
+Genetic Algorithm
+Kaleb Hannan
+10-1-2024
+HW3
+Classwork for COS 470 at the Univerisy of Maine Orono
+
+# Discription:  
+This program is an example of a Genetic Algorithm for string matching.
+The program take a filename were your tagret string is stored and then use the algorithm to evolve 
+the population until it matches the tagret string.  When the program is running it will print out the 
+best individual in the population with the fitness of that individual.  When the program finds a match
+it will print out the individual that matchs and the number of iterations that it took to get there. 
+
+# Dependencies:
+python 3
+
+# How to Run the Program:
+python3 GeneticAlgroithm.py
