@@ -1,7 +1,7 @@
 # Kaleb Hannnan
 # HW3
 # COS 470 at the University of Maine Orono
-# Genetic Algroithm for matching to a string a ACSII chars
+# Genetic Algroithm for matching a string of ACSII chars
 
 import random
 
