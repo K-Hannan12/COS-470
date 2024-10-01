@@ -52,11 +52,6 @@ def selection(population, avgFitness, targetString):
     if len(eligibleparents) < 2:
         p1 = random.choice(population)
         p2 = random.choice(population)
-        while p1 == p2:
-            p2 = random.choice(population)
-        else:
-            p1 = random.choice(population)
-            p2 = random.choice(population)
     else:
         p1 = random.choice(eligibleparents)
         p2 = random.choice(eligibleparents)
@@ -111,17 +106,13 @@ def GeneticAlgroithm():
         
         population = newPopulation
 
-        if len(population)<100:
-            print(len(population))
-            break
-
         population.sort(key = lambda ind: fitness(ind, targetString), reverse = True)
 
         if population[0] == targetString:
-            print("Match Found in Iteration " + str(iterations) + ": " + population[0] + "\n\n\n")
+            print("Match Found in Iteration " + str(iterations) + ": " + population[0] + "\n\n")
             return
         else:
-            print("Best Match in Iteration " + str(iterations) + ": " + population[0] + "\n\n\n")
+            print("Best Match in Iteration " + str(iterations) + ": " + population[0] + "\n")
             iterations += 1
 
 GeneticAlgroithm()

@@ -1,0 +1,3 @@
+Hello, World! This is a test string for the genetic algorithm. 
+It includes uppercase and lowercase letters, numbers like 12345, 
+and various symbols: !@#$%^&*(). Let's see if the algorithm can match it!
