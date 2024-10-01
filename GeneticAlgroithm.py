@@ -68,8 +68,13 @@ def GeneticAlgroithm():
     print("Enter File Name:", end=" ")
     fileName = input()
 
-    with open(fileName, "r") as File:
-        targetString = File.read()
+    try:
+        with open(fileName, "r") as File:
+            targetString = File.read()
+    
+    except FileNotFoundError:
+        print("Error: File " + "\"" + fileName + "\"" + " Not Found.\nExiting Program.")
+        return 
 
     # Get len of the string to make the correct population the correct length
     lenOftarget = len(targetString)
