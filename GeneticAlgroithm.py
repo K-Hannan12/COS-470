@@ -9,7 +9,7 @@ import random
 def crossover(p1, p2):
     length = len(p1)
     ranNum = random.randint(1,length - 1)
-    child = p1[:ranNum] + p2[ranNum + 1:]
+    child = p1[:ranNum] + p2[ranNum:]
 
     return child
 
@@ -54,11 +54,12 @@ def selection(population, avgFitness, targetString):
         p2 = random.choice(population)
         while p1 == p2:
             p2 = random.choice(population)
+        else:
+            p1 = random.choice(population)
+            p2 = random.choice(population)
     else:
         p1 = random.choice(eligibleparents)
         p2 = random.choice(eligibleparents)
-        while p1 == p2:
-            p2 = random.choice(eligibleparents)
     return p1, p2
              
 
@@ -74,9 +75,6 @@ def GeneticAlgroithm():
 
     with open(fileName, "r") as File:
         targetString = File.read()
-
-    # this might need to get replaced but for know we good
-    targetString = targetString.replace("\n", " ")
 
     # Get len of the string to make the correct population the correct length
     lenOftarget = len(targetString)
@@ -99,25 +97,31 @@ def GeneticAlgroithm():
             totalFitness += fitness(ind,targetString)
             if totalFitness !=0:
                 avgFitness = totalFitness / POPULATION_SIZE
+            else:
+                avgFitness = 0.0
         
         #Create new population 
         i = 0
         while i < POPULATION_SIZE:
             p1,p2 = selection(population,avgFitness,targetString)
-            child = crossover(p1, p2) 
+            child = crossover(p1, p2)
             child = mutation(child,targetString,MUTATION_RATE)
             newPopulation.append(child)
             i+=1
         
         population = newPopulation
 
+        if len(population)<100:
+            print(len(population))
+            break
+
         population.sort(key = lambda ind: fitness(ind, targetString), reverse = True)
 
         if population[0] == targetString:
-            print("Match Found in Iteration " + str(iterations) + ": " + population[0])
-            break
+            print("Match Found in Iteration " + str(iterations) + ": " + population[0] + "\n\n\n")
+            return
         else:
-            print("Best Match in Iteration " + str(iterations) + ": " + population[0])
+            print("Best Match in Iteration " + str(iterations) + ": " + population[0] + "\n\n\n")
             iterations += 1
 
 GeneticAlgroithm()
