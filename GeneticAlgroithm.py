@@ -120,7 +120,9 @@ def GeneticAlgroithm():
             print("Match Found in Iteration #" + str(iterations) + ":\n" + population[0] + "\n\n")
             return
         else:
+            # for testing purposes only
             #print("Best Match in Iteration " + str(iterations) + ": \n" + population[0] + "\n")
+            
             print("Best Match in Iteration #" + str(iterations) + " has fitness of " + str((fitness(population[0],targetString)/ len(targetString) * 100))+ "%\n\n")
             iterations += 1
 
