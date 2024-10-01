@@ -44,11 +44,11 @@ def createPopulation(lenOftarget,populationNum):
     return population
 
 # This function selects parents to make children 
-def selection(population, avgFitness, targetString):
+def selection(population, avgFitness,fitnessPerInd):
     eligibleparents = []
-    for i in population:
-        if fitness(i,targetString) >= avgFitness:
-            eligibleparents.append(i)
+    for i in range(len(fitnessPerInd)):
+        if fitnessPerInd[i] >= avgFitness:
+            eligibleparents.append(population[i])
     if len(eligibleparents) < 2:
         p1 = random.choice(population)
         p2 = random.choice(population)
@@ -85,11 +85,14 @@ def GeneticAlgroithm():
     #While loop to run until we match the string
     while True:
         newPopulation = []
+        fitnessPerInd = []
         totalFitness = 0.0
 
         #calculate the avg fitness of the population
         for ind in population:
-            totalFitness += fitness(ind,targetString)
+            fit = fitness(ind,targetString)
+            totalFitness += fit
+            fitnessPerInd.append(fit)
             if totalFitness !=0:
                 avgFitness = totalFitness / POPULATION_SIZE
             else:
@@ -98,7 +101,7 @@ def GeneticAlgroithm():
         #Create new population 
         i = 0
         while i < POPULATION_SIZE:
-            p1,p2 = selection(population,avgFitness,targetString)
+            p1,p2 = selection(population,avgFitness,fitnessPerInd)
             child = crossover(p1, p2)
             child = mutation(child,targetString,MUTATION_RATE)
             newPopulation.append(child)
@@ -109,10 +112,10 @@ def GeneticAlgroithm():
         population.sort(key = lambda ind: fitness(ind, targetString), reverse = True)
 
         if population[0] == targetString:
-            print("Match Found in Iteration " + str(iterations) + ": " + population[0] + "\n\n")
+            print("Match Found in Iteration " + str(iterations) + ":\n" + population[0] + "\n\n")
             return
         else:
-            print("Best Match in Iteration " + str(iterations) + ": " + population[0] + "\n")
+            print("Best Match in Iteration " + str(iterations) + ": \n" + population[0] + "\n")
             iterations += 1
 
 GeneticAlgroithm()

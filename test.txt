@@ -1,12 +1,38 @@
-The quick brown fox jumps over the lazy dog! 1234567890.
-In a world where technology reigns supreme, 
-artificial intelligence (AI) is revolutionizing industries. 
-Consider: 
-1. Machine Learning and Deep Learning (a subset of AI)
-2. Natural Language Processing (NLP)
-3. Robotics and Automation: Enhancing productivity!
-  
-Ponder this: "To be or not to be, that is the question." 
-What if Shakespeare had access to AI? Would he still write such profound works? 
-Let's explore the realms of creativity and logic!
-Can a computer truly understand art? Or is it merely simulating the human experience?
+Chelsea FC Squad 
+
+Goalkeepers:
+1 - Robert Sanchez
+12 - Filip Jorgensen
+47 - Lucas Bergstrom
+
+Defenders:
+2 - Axel Disasi
+3 - Marc Cucurella
+4 - Tosin Adarabioyo
+5 - Benoit Badiashile
+6 - Levi Colwill
+21 - Ben Chilwell
+24 - Reece James
+27 - Malo Gusto
+29 - Wesley Fofana
+34 - Josh Acheampong
+
+Midfielders:
+8 - Enzo Fernandez
+10 - Mykhailo Mudryk
+17 - Carney Chukwuemeka
+20 - Cole Palmer
+22 - Kiernan Dewsbury-Hall
+25 - Moises Caicedo
+31 - Cesare Casadei
+40 - Renato Veiga
+45 - Romeo Lavia
+
+Forwards:
+11 - Noni Madueke
+15 - Nicolas Jackson
+18 - Christopher Nkunku
+32 - Tyrique George
+36 - Deivid Washington
+37 - Omari Kellyman
+38 - Marc Guiu
