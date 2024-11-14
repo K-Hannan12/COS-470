@@ -54,7 +54,7 @@ edge(kitchen, diningroom).
 edge(tower, diningroom).
 edge(hall, tower).
 edge(lab, tower).
-edge(shed, basement).
+edge(shed, crypt).
 
 /* The starting location of the things.
 */
@@ -92,8 +92,8 @@ connected (one edge away).
 move(X) :-
     canmove(X)
     -> (
-		location(CurrentLoc),
-        format('Moving from ~w to ~w~n', [CurrentLoc, X]),
+		%location(CurrentLoc), For Debuging
+        %format('Moving from ~w to ~w~n', [CurrentLoc, X]), For Debuging
 	    retract(location(_)),
 	    assertz(location(X))
 	);
@@ -117,7 +117,7 @@ take(X) :-
 	contains(Y, X)
     )
     -> (
-		format('~nTaking ~w from ~w~n~n', [X, Y]),
+		%format('~nTaking ~w from ~w~n~n', [X, Y]), For Debuging
 	    assertz(has(X)),
 	    retract(contains(Y,X)),
 	    assertz(contains(nowhere,X))
