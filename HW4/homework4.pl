@@ -168,7 +168,7 @@ I have provided for testing alternate maps
 but note that I will use my own. For
 grading */
 
-% resetWorld
+% resetWorld: This resets the word to the default as from when I got the assinment.
 reset():-
 	retractall(location(_)),
 	assertz(location(kitchen)),	
@@ -233,9 +233,7 @@ goToExit():-
 %
 %
 play():-
-	reset(), %make sure that eveything is set proporly
 	getThing(message),
 	getThing(code),
 	getThing(key),
-	goToExit(),
-	win().
+	goToExit().
