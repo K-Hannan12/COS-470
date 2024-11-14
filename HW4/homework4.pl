@@ -171,7 +171,7 @@ I have provided for testing alternate maps
 but note that I will use my own. For
 grading */
 
-% resetWorld: This resets the word to the default as from when I got the assinment.
+% resetWorld: (This resets the word to the default as from when I got the assinment.)
 reset():-
 	retractall(location(_)),
 	assertz(location(kitchen)),	
