@@ -171,6 +171,12 @@ I have provided for testing alternate maps
 but note that I will use my own. For
 grading */
 
+
+% Kaleb Hannan
+% COS470
+% HW4
+% 11/14/2024
+
 % resetWorld: (This resets the word to the default as from when I got the assinment.)
 reset():-
 	retractall(location(_)),
