@@ -54,7 +54,7 @@ edge(kitchen, diningroom).
 edge(tower, diningroom).
 edge(hall, tower).
 edge(lab, tower).
-edge(shed, basement).
+edge(shed, crypt).
 
 /* The starting location of the things.
 */
@@ -92,6 +92,8 @@ connected (one edge away).
 move(X) :-
     canmove(X)
     -> (
+		%location(CurrentLoc), For Debuging
+        %format('Moving from ~w to ~w~n', [CurrentLoc, X]), For Debuging
 	    retract(location(_)),
 	    assertz(location(X))
 	);
@@ -115,6 +117,7 @@ take(X) :-
 	contains(Y, X)
     )
     -> (
+		%format('~nTaking ~w from ~w~n~n', [X, Y]), For Debuging
 	    assertz(has(X)),
 	    retract(contains(Y,X)),
 	    assertz(contains(nowhere,X))
@@ -168,7 +171,13 @@ I have provided for testing alternate maps
 but note that I will use my own. For
 grading */
 
-% resetWorld
+
+% Kaleb Hannan
+% COS470
+% HW4
+% 11/14/2024
+
+% resetWorld: (This resets the word to the default as from when I got the assinment.)
 reset():-
 	retractall(location(_)),
 	assertz(location(kitchen)),	
@@ -190,16 +199,17 @@ canmove(X) :-
 canFindMove(X,Y):-
 	edge(X, Y); edge(Y, X).
 
-% Get path from one location to another	
-path(Start,End,Path):- pathHelper(Start,End,[Start],Path).
-
-pathHelper(End,End,Visited,Visited). %Base case for recersive function
-pathHelper(Start, End, Visited, Path):- 
-	canFindMove(Start,NextLoc),
-	\+ member(NextLoc, Visited),
-    NextLoc \= Start, 
-	pathHelper(NextLoc, End, [NextLoc | Visited], Path).
 %
+% Get path from one location to another	
+path(Start, End, Path) :- 
+    pathHelper(Start, End, [Start], Path).
+
+% Path helper with visited tracking to avoid loops
+pathHelper(End, End, Visited, Visited). % Base case for recursive function
+pathHelper(Start, End, Visited, Path) :-
+    canFindMove(Start, NextLoc),
+    \+ member(NextLoc, Visited),
+    pathHelper(NextLoc, End, [NextLoc | Visited], Path).
 %
 % Move along path
 moveAlongPath([]). % Base case for recersive function
@@ -233,9 +243,7 @@ goToExit():-
 %
 %
 play():-
-	reset(), %make sure that eveything is set proporly
 	getThing(message),
 	getThing(code),
 	getThing(key),
-	goToExit(),
-	win().
+	goToExit().
