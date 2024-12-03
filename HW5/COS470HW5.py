@@ -56,7 +56,7 @@ model = BBModel(input_size)
 epochs = 100
 learning_Rate = 0.001
 
-criterion = nn.MSELoss()
+criterion = nn.CrossEntropyLoss()       #MSELoss()
 optimizer = optim.SGD(model.parameters(), learning_Rate)
 
 
@@ -85,5 +85,5 @@ with torch.no_grad():
 test_loss = criterion(perdiction,test_label)
 
 print(f"Test Loss: {test_loss.item():.4f}\n")
-for i in range(10):  # Print the first 10 examples (or however many you want)
+for i in range(10):
     print(f"True value: {test_label[i].item():.2f}, Predicted value: {perdiction[i].item():.2f}")
