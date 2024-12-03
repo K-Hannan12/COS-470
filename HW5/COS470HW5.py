@@ -53,7 +53,7 @@ class BBModel(nn.Module):
 input_size = traning_data.shape[1]
 model = BBModel(input_size)
 
-epochs = 100
+epochs = 750
 learning_Rate = 0.001
 
 criterion = nn.MSELoss()
