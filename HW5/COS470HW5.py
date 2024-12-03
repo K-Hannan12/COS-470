@@ -1,36 +1,35 @@
-from sklearn.model_selection import train_test_split
 import torch
 import torch.nn as nn
 import torch.optim as optim
 import pandas as pd
-import numpy as np
+import matplotlib.pyplot as plt
 
 # Kaleb Hannan
 # HW5
 # 11/25/24
 
 # Get test data
-data = pd.read_csv('HW5/homework5_data.csv')
+traning_data = pd.read_csv('HW5/traning_data_persent.csv')
+test_data = pd.read_csv('HW5/test_data_persent.csv')
 
 # Get input data
-BBData = data.iloc[:, 1:-2]
+traning_BBData = traning_data.iloc[:, 1:-2]
+test_BBData = test_data.iloc[:, 1:-2]
 
 # Get label (Games Won)
-gamesWon = data.iloc[:,0]
+traning_gamesWon = traning_data.iloc[:,0]
+test_gamesWon = test_data.iloc[:,0]
 
 # Norlize data between 0 - 1
-normilizedBBData = (BBData - BBData.min()) / (BBData.max() - BBData.min())
-
-
-# Split data randomly 15% test 85% traning
-traning_data,test_data, traning_label, test_label = train_test_split(normilizedBBData, gamesWon,train_size=0.85, test_size= 0.15, random_state=42)
+traningNormilizedBBData = (traning_BBData - traning_BBData.min()) / (traning_BBData.max() - traning_BBData.min())
+testNormilizedBBData = (test_BBData - traning_BBData.min()) / (traning_BBData.max() - traning_BBData.min())
 
 
 # Change data type to tensors
-traning_data = torch.tensor(traning_data.values, dtype=torch.float32)
-traning_label = torch.tensor(traning_label.values, dtype=torch.float32).view(-1,1)
-test_data = torch.tensor(test_data.values, dtype=torch.float32)
-test_label = torch.tensor(test_label.values, dtype=torch.float32).view(-1,1)
+traning_data = torch.tensor(traningNormilizedBBData.values, dtype=torch.float32)
+traning_label = torch.tensor(traning_gamesWon.values, dtype=torch.float32).view(-1,1)
+test_data = torch.tensor(testNormilizedBBData.values, dtype=torch.float32)
+test_label = torch.tensor(test_gamesWon.values, dtype=torch.float32).view(-1,1)
 
 
 class BBModel(nn.Module):
@@ -53,12 +52,14 @@ class BBModel(nn.Module):
 input_size = traning_data.shape[1]
 model = BBModel(input_size)
 
-epochs = 10000
-learning_Rate = 0.0001
+epochs = 750
+learning_Rate = 0.001
 
 criterion = nn.MSELoss()
-optimizer = optim.SGD(model.parameters(), lr=learning_Rate)
+optimizer = optim.SGD(model.parameters(), learning_Rate)
 
+# Array for storing loss values
+lossArray = []
 
 # Train model
 for epoch in range(epochs):
@@ -67,6 +68,8 @@ for epoch in range(epochs):
     # Compute loss
     loss = criterion(y_pred, traning_label)
 
+    # add loss to array
+    lossArray.append(loss.item())
     
     loss.backward()
     optimizer.step()
@@ -85,5 +88,14 @@ with torch.no_grad():
 test_loss = criterion(perdiction,test_label)
 
 print(f"Test Loss: {test_loss.item():.4f}\n")
-for i in range(10):
+for i in range(10):  # Print the first 10 examples (or however many you want)
     print(f"True value: {test_label[i].item():.2f}, Predicted value: {perdiction[i].item():.2f}")
+
+# Create loss plot
+plt.plot(lossArray, label = "Loss")
+plt.xlabel('epoch')
+plt.ylabel('total loss')
+plt.xlim(0, len(lossArray))
+plt.ylim(0, max(lossArray) + 0.1)
+plt.grid(True)
+plt.show()
