@@ -22,8 +22,8 @@ gamesWon = data.iloc[:,0]
 normilizedBBData = (BBData - BBData.min()) / (BBData.max() - BBData.min())
 
 
-# Split data randomly 20% test 80% traning
-traning_data,test_data, traning_label, test_label = train_test_split(normilizedBBData, gamesWon, test_size= 0.2, random_state=42)
+# Split data randomly 15% test 85% traning
+traning_data,test_data, traning_label, test_label = train_test_split(normilizedBBData, gamesWon,train_size=0.85, test_size= 0.15, random_state=42)
 
 
 # Change data type to tensors
@@ -53,11 +53,11 @@ class BBModel(nn.Module):
 input_size = traning_data.shape[1]
 model = BBModel(input_size)
 
-epochs = 750
-learning_Rate = 0.001
+epochs = 10000
+learning_Rate = 0.0001
 
 criterion = nn.MSELoss()
-optimizer = optim.SGD(model.parameters(), learning_Rate)
+optimizer = optim.SGD(model.parameters(), lr=learning_Rate)
 
 
 # Train model
