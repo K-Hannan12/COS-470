@@ -56,7 +56,7 @@ model = BBModel(input_size)
 epochs = 750
 learning_Rate = 0.001
 
-criterion = nn.CrossEntropyLoss()       #MSELoss()
+criterion = nn.MSELoss()
 optimizer = optim.SGD(model.parameters(), learning_Rate)
 
 
