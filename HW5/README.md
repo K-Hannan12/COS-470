@@ -13,6 +13,7 @@ python 3
 pytourch
 pandas
 sklearn
+matplotlib
 
 # How to Run the Program:
 python3 COS470HW5.py
