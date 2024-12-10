@@ -63,8 +63,10 @@ lossArray = []
 
 # Train model
 for epoch in range(epochs):
+
     # Get perdiction
     y_pred = model(traning_data)
+    
     # Compute loss
     loss = criterion(y_pred, traning_label)
 
@@ -88,7 +90,7 @@ with torch.no_grad():
 test_loss = criterion(perdiction,test_label)
 
 print(f"Test Loss: {test_loss.item():.4f}\n")
-for i in range(10):  # Print the first 10 examples (or however many you want)
+for i in range(10):  # Print the first 10 examples
     print(f"True value: {test_label[i].item():.2f}, Predicted value: {perdiction[i].item():.2f}")
 
 # Create loss plot
