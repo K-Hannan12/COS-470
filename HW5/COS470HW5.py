@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 # 11/25/24
 
 # Get test data
-traning_data = pd.read_csv('HW5/traning_data_persent.csv')
-test_data = pd.read_csv('HW5/test_data_persent.csv')
+traning_data = pd.read_csv('HW5/traning_data_percent.csv')
+test_data = pd.read_csv('HW5/test_data_percent.csv')
 
 # Get input data
 traning_BBData = traning_data.iloc[:, 1:-2]
